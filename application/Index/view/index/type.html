@@ -1,0 +1,293 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>homepage</title>
+
+<!-- Behavioral Meta Data -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="icon" type="image/png" href="__STATIC__/index/img/small-logo-01.png">
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,900,900italic,700italic,700,500italic,400italic,500,300italic,300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='__STATIC__/index/css/bootstrap.css' rel='stylesheet' type='text/css'>
+<link href='__STATIC__/index/css/bootstrap-theme.min.css' rel='stylesheet' type='text/css'>
+<link href='__STATIC__/index/style.css' rel='stylesheet' type='text/css'>
+<link href="__STATIC__/admin/assets/css/font-awesome.css" rel="stylesheet" />
+<link href="__STATIC__/index/css/layui.css" rel="stylesheet" />
+	<style>
+		.layui-nav .layui-nav-item{
+			min-height: 50px;
+			line-height: 50px;
+			background-color: #202020;
+		}
+		.layui-nav{
+			background-color: #202020;
+		}
+
+	</style>
+</head>
+<body>
+<!-- HEADER -->
+<div id="wrapper-header">
+	<div  class="object navbar">
+		<div class="logo"><a href="{:url('index/index')}"><img src="__STATIC__/index/img/logo-burst1.png" alt="logo smc" height="38" width="90"></a></div>
+		<div id="wrapper-bouton-icon">
+			<div style="float: right;margin-top:13.5px;" >
+				{if  condition="$Think.session.studentid"}
+					<!--<a href="{:url('index/schedule', ['userid' => $Think.session.studentid])}"><button type="button" class="btn btn-default">个人中心</button></a>-->
+				<ul class="layui-nav">
+					<li class="layui-nav-item"><a href="{:url('index/schedule', ['userid' => $Think.session.studentid])}">个人中心</a></li>
+					<li class="layui-nav-item"><a href="{:url('index/logout')}" title="退出"><i class="fa fa-sign-out"></i></a></li>
+				</ul>
+				{else/}
+				<ul class="layui-nav">
+					<li class="layui-nav-item"><a href="#" data-toggle="modal" data-target="#slogin">学生登录</a></li>
+					<li class="layui-nav-item"><a href="#" data-toggle="modal" data-target="#tlogin">教师登录</a></li>
+				</ul>
+				{/if}
+			</div>
+		</div>
+		<p id="showerror" hidden>{$Think.session.loginError}</p>
+    </div>
+</div>
+
+<div class="modal fade" id="slogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">用户登录</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" action="{:url('index/login')}" method="post" >
+					<div class="form-group">
+						<label for="inputUser" class="col-md-2 control-label">用户名</label>
+						<div class="col-md-6">
+							<input type="inputUser" class="form-control" id="inputUser" placeholder="用户名" name="studentname" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputPassword3" class="col-md-2 control-label">密码</label>
+						<div class="col-md-6">
+							<input type="password" class="form-control" id="inputPassword3" placeholder="密码" name="password" required>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<input type="submit" name="" id="signin" value="登录" class="btn btn-default">
+
+						</div>
+					</div>
+				</form>
+
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" onclick="" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="tlogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">教师登录</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" action="{:url('index/tlogin')}" method="post" >
+					<div class="form-group">
+						<label for="inputUser" class="col-md-2 control-label">用户名</label>
+						<div class="col-md-6">
+							<input type="inputUser" class="form-control" id="inputUser" placeholder="用户名" name="teachername" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputPassword3" class="col-md-2 control-label">密码</label>
+						<div class="col-md-6">
+							<input type="password" class="form-control" id="inputPassword3" placeholder="密码" name="password" required>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<input type="submit" name="" id="signin" value="登录" class="btn btn-default">
+
+						</div>
+					</div>
+				</form>
+
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" onclick="" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- NAVBAR -->
+
+<div id="wrapper-navbar">
+		<div class="navbar object">
+    		<div id="wrapper-sorting">
+            <div id="wrapper-title-1">
+            <div class="top-rated object">Top-rated</div>
+            	<div id="fleche-nav-1"></div>
+    		</div>
+
+            <div id="wrapper-title-2">
+            <a href="#"><div class="recent object">Recent</div></a>
+                <div id="fleche-nav-2"></div>
+    		</div>
+
+            <div id="wrapper-title-3">
+            <a href="#"><div class="oldies object">Oldies</div></a>
+                <div id="fleche-nav-3"></div>
+    		</div>
+            </div>
+			<form class="navbar-form navbar-left" role="search" action="search.php">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Search" name="key">
+				</div>
+				<button type="submit" class="btn btn-default">搜索</button>
+			</form>
+            <div id="wrapper-bouton-icon">
+            	<div id="bouton-ai"><img src="__STATIC__/index/img/icon-ai.svg" alt="illustrator" title="Illustrator" height="28" width="28"></div>
+            	<div id="bouton-psd"><img src="__STATIC__/index/img/icon-psd.svg" alt="photoshop" title="Photoshop" height="28" width="28"></div>
+            	<div id="bouton-theme"><img src="__STATIC__/index/img/icon-themes.svg" alt="theme" title="Theme" height="28" width="28"></div>
+            	<div id="bouton-font"><img src="__STATIC__/index/img/icon-font.svg" alt="font" title="Font" height="28" width="28"></div>
+            	<!--<div id="bouton-photo"><img src="img/icon-photo.svg" alt="photo" title="Photo" height="28" width="28"></div>-->
+            	<div id="bouton-premium"><img src="__STATIC__/index/img/icon-premium.svg" alt="premium" title="Premium" height="28" width="28"></div>
+			</div>
+    	</div>
+    </div>
+
+<!-- FILTER -->
+
+	<div id="wrapper-container">
+    
+		<div class="container object">
+
+			<div id="main-container-image">
+                       
+					<!--<section class="work">-->
+
+						<!--<figure class="white">-->
+							<!--<a href="index/details.html">-->
+								<!--<img src="__STATIC__/index/img/psd-4r.jpg" alt="" />-->
+								<!--<dl>-->
+									<!--<dt>Movie Salon Poster</dt>-->
+									<!--<dd>intro</dd>-->
+								<!--</dl>-->
+							<!--</a>-->
+                            <!--<div id="wrapper-part-info">-->
+                            	<!--<div class="part-info-image"><img src="__STATIC__/index/img/icon-psd.svg" alt="" width="28" height="28"/></div>-->
+                            	<!--<div id="part-info">Movie Salon Poster</div>-->
+							<!--</div>-->
+                        <!--</figure>-->
+					<!--</section>-->
+
+				<section class="work">
+					{volist name='lesson' id='vo'}
+					<figure class="white">
+						<a href="{:url('index/details', ['lessonid' => $vo.lessonid,'tid'=>$vo.tid])}">
+							<img src="__STATIC__/poster/{$vo.pic}" alt="" width="223.448" height="223.488"/>
+							<dl>
+								<dt>{$vo.lessonname}</dt>
+								<dd>{$vo.intro|msubstr=0,100,'utf-8',true}</dd>
+							</dl>
+						</a>
+						<div id="wrapper-part-info">
+							<div class="part-info-image"><img src="__STATIC__/index/img/icon-psd.svg" alt="" width="28" height="28"/>
+							</div>
+							<div id="part-info">{$vo.lessonname}</div>
+						</div>
+					</figure>
+					{/volist}
+				</section>
+				</div>
+			</div>
+         
+    <div id="wrapper-oldnew">
+    	<div class="oldnew">
+        	<div class="wrapper-oldnew-prev">
+            	<div id="oldnew-prev"></div>
+        	</div>
+            <div class="wrapper-oldnew-next">
+            	<div id="oldnew-next"></div>
+    		</div>
+        </div>
+	</div>     
+            
+	<div id="wrapper-thank">
+    	<div class="thank">
+        	<div class="thank-text">T<span style="letter-spacing:-5px;">est</span>ing</div>
+    	</div>
+	</div>
+	</div>
+    
+    
+    <div id="wrapper-copyright">
+		<div class="copyright">
+    		<div class="copy-text object">Copyright &copy; 2018.Lee-Hsu & Yorkin Lau All rights reserved.</div>
+    		
+			<div class="wrapper-navbouton">
+    			<div class="google object">testin</div>
+    			<!--<div class="facebook object">f</div>
+    			<div class="linkin object">i</div>
+    			<div class="dribbble object">d</div>-->
+    		</div>
+    	</div>
+    </div>
+
+</div>
+
+<!-- SCRIPT -->
+<script type="text/javascript" src="__STATIC__/index/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+<!--<script type="text/javascript" src="__STATIC__/index/js/jquery.scrollTo.min.js"></script>-->
+<script type="text/javascript" src="__STATIC__/index/js/jquery.localScroll.min.js"></script>
+<script type="text/javascript" src="__STATIC__/index/js/jquery-animate-css-rotate-scale.js"></script>
+<script type="text/javascript" src="__STATIC__/index/js/fastclick.min.js"></script>
+<script type="text/javascript" src="__STATIC__/index/js/jquery.animate-colors-min.js"></script>
+<script type="text/javascript" src="__STATIC__/index/js/jquery.animate-shadow-min.js"></script>
+<script type="text/javascript" src="__STATIC__/index/js/main.js"></script>
+<script type="text/javascript" src="__STATIC__/index/js/bootstrap.min.js"></script>
+<script src="__STATIC__/index/js/layui.js"></script>
+<script src="__STATIC__/index/js/element.js"></script>
+<script>
+    //注意：导航 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //…
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        // $.localScroll();
+        // $(".cache").delay(100).fadeOut(10);
+        //
+        // $("#wrapper-header").delay(100).animate({opacity:'1',width:'100%'},10);
+        // $("#wrapper-navbar").delay(100).animate({opacity:'1',height:'60px'},10);
+        //
+        // $("#main-container-image").delay(100).animate({opacity:'1'},10);
+
+
+
+        setTimeout(function(){
+            var msg=$('#showerror').text();
+            // alert(msg);
+            if(msg!="")
+                demo.showNotification('top','center');
+			    layer.msg(msg);
+		}, 3000);
+
+    });
+</script>
+
+</body>
+</html>

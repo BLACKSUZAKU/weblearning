@@ -1,0 +1,223 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>homepage</title>
+
+    <!-- Behavioral Meta Data -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="icon" type="image/png" href="__STATIC__/index/img/small-logo-01.png">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,900,900italic,700italic,700,500italic,400italic,500,300italic,300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='__STATIC__/index/css/bootstrap.css' rel='stylesheet' type='text/css'>
+    <link href='__STATIC__/index/css/bootstrap-theme.min.css' rel='stylesheet' type='text/css'>
+    <link href='__STATIC__/index/style.css' rel='stylesheet' type='text/css'>
+    <!-- Animation library for notifications   -->
+    <link href="__STATIC__/index/assets/css/animate.min.css" rel="stylesheet"/>
+    <link href="__STATIC__/admin/assets/css/font-awesome.css" rel="stylesheet" />
+    <!--  Paper Dashboard core CSS    -->
+    <link href="__STATIC__/index/assets/css/paper-dashboard.css" rel="stylesheet"/>
+
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="__STATIC__/index/assets/css/demo.css" rel="stylesheet" />
+    <!--  Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+    <link href="__STATIC__/index/assets/css/themify-icons.css" rel="stylesheet">
+    <link href="__STATIC__/admin/assets/css/custom-styles.css" rel="stylesheet" />
+    <link href="__STATIC__/index/css/layui.css" rel="stylesheet" />
+    <style>
+        .nav>li>a>p{
+            text-align: center;
+        }
+        .pagination{text-align:center;margin-top:20px;margin-bottom: 20px;}
+        .pagination li{margin:0px 10px; border:1px solid #e6e6e6;padding: 3px 8px;display: inline-block;}
+        .pagination .active{background-color: #46A3FF;color: #fff;}
+        .pagination .disabled{color:#aaa;}
+        .form-control{
+            border: 1px solid #ccc;
+            background-color: #ffffff;
+
+        }
+        .form-control>label{
+            margin-top: 7px;
+            line-height: 40px;
+            height: 40px;
+        }
+        input{
+            color: #0f0f0f;
+        }
+    </style>
+</head>
+<body>
+<!-- HEADER -->
+<div id="wrapper-header">
+    <div id="main-header" class="object">
+        <div class="logo"><a href="{:url('index/index')}"><img src="__STATIC__/index/img/logo-burst1.png" alt="logo smc" height="38" width="90"></a></div>
+        <div id="main_tip_search" style="float: right;width: auto">
+            <div style="float: right;margin-top:0;" >
+                {if  condition="$Think.session.studentid"}
+                <!--<a href="{:url('index/schedule', ['userid' => $Think.session.studentid])}"><button type="button" class="btn btn-default">个人中心</button></a>-->
+                <ul class="layui-nav" style="background-color: #202020">
+                    <li class="layui-btn"><a href="{:url('index/schedule', ['userid' => $Think.session.studentid])}"  style="color: white">个人中心</a></li>
+                    <li class="layui-btn"><a href="{:url('index/logout')}" title="退出"><i class="fa fa-sign-out"  style="color: white"></i></a></li>
+                </ul>
+                {elseif condition="$Think.session.teacherid"/}
+                <ul class="layui-nav" style="background-color: #202020">
+                    <li class="layui-btn"><a href="{:url('index/tschedule', ['userid' => $Think.session.studentid])}"  style="color: white">个人中心</a></li>
+                    <li class="layui-btn"><a href="{:url('index/logout')}" title="退出"><i class="fa fa-sign-out"  style="color: white"></i></a></li>
+                </ul>
+                {else /}
+                <ul class="layui-nav" style="background-color: #202020">
+                    <li class="layui-btn"><a href="#" data-toggle="modal" data-target="#slogin"  style="color: white">学生登录</a></li>
+                    <li class="layui-btn "><a href="#" data-toggle="modal" data-target="#tlogin"  style="color: white">教师登录</a></li>
+                    <li class="layui-btn "><a href="#" data-toggle="modal" data-target="#reg"  style="color: white">注册</a></li>
+                </ul>
+                {/if}
+            </div>
+        </div>
+        <div id="main_tip_search" style="float: right;width: auto">
+            <form action="{:url('index/search')}">
+                <input type="text" name="key" id="tip_search_input"  autocomplete=off>
+                <button type="submit" class="layui-btn">搜索</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- NAVBAR -->
+
+<div id="wrapper-navbar">
+    <div class="navbar object">
+        <div id="wrapper-sorting">
+            <div id="wrapper-title-1">
+                <div class="top-rated object">Top-rated</div>
+                <div id="fleche-nav-1"></div>
+            </div>
+
+            <div id="wrapper-title-2">
+                <a href="#"><div class="recent object">Recent</div></a>
+                <div id="fleche-nav-2"></div>
+            </div>
+
+            <div id="wrapper-title-3">
+                <a href="#"><div class="oldies object">Oldies</div></a>
+                <div id="fleche-nav-3"></div>
+            </div>
+        </div>
+
+        <div id="wrapper-bouton-icon">
+            <div id="bouton-ai"><img src="__STATIC__/index/img/icon-ai.svg" alt="illustrator" title="Illustrator" height="28" width="28"></div>
+            <div id="bouton-psd"><img src="__STATIC__/index/img/icon-psd.svg" alt="photoshop" title="Photoshop" height="28" width="28"></div>
+            <div id="bouton-theme"><img src="__STATIC__/index/img/icon-themes.svg" alt="theme" title="Theme" height="28" width="28"></div>
+            <div id="bouton-font"><img src="__STATIC__/index/img/icon-font.svg" alt="font" title="Font" height="28" width="28"></div>
+            <!--<div id="bouton-photo"><img src="img/icon-photo.svg" alt="photo" title="Photo" height="28" width="28"></div>-->
+            <div id="bouton-premium"><img src="__STATIC__/index/img/icon-premium.svg" alt="premium" title="Premium" height="28" width="28"></div>
+        </div>
+    </div>
+</div>
+
+<!-- FILTER -->
+<div id="wrapper-container">
+    <div class="container object">
+        <div >
+            <div class="wrapper">
+                <div class="sidebar" data-background-color="white" data-active-color="danger" style="overflow: hidden">
+                    <div class="sidebar-wrapper">
+                        <!--<div class="author">-->
+                            <!--<img class="avatar border-white" src="" alt="..." width="260px"/>-->
+                            <!--<h4 class="title" style="text-align: center">Chet Faker</h4>-->
+                        <!--</div>-->
+                        <div class="card card-user">
+                            <div class="image">
+                                <img src="__STATIC__/index/assets/img/background.jpg" alt="..."/>
+                            </div>
+                            <div class="content" style="min-height: auto">
+                                <div class="author">
+                                    <img class="avatar border-white" src="__STATIC__/img/{$Think.Session.portrait}" alt="..."/>
+                                    <h4 class="title">{$Think.Session.username}<br />
+                                        <a href="#"><small>@chetfaker</small></a>
+                                    </h4>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="text-center">
+                                <div class="row">
+                                    <ul class="nav">
+                                        <li class="<?php if(request()->path()=='index/schedule') echo 'active-menu'; ?>">
+                                            <a href="{:url('index/schedule')}" >
+                                                <p>课程表</p>
+                                            </a>
+                                        </li>
+                                        <li class="<?php if(request()->path()=='index/favorite') echo 'active-menu'; ?>">
+                                            <a href="{:url('index/favorite')}" >
+                                                <p>收藏</p>
+                                            </a>
+                                        </li>
+                                        <li  class="<?php if(request()->path()=='index/comment') echo 'active-menu'; ?>">
+                                            <a href="{:url('index/comment')}">
+                                                <p>评论</p>
+                                            </a>
+                                        </li>
+                                        <li class="<?php if(request()->path()=='index/spersoninfo') echo 'active-menu'; ?>">
+                                            <a href="{:url('index/spersoninfo')}">
+                                                <p>个人资料</p>
+                                            </a>
+                                        </li>
+                                        <li class="<?php if(request()->path()=='index/schangepass') echo 'active-menu'; ?>">
+                                            <a href="{:url('index/schangepass')}">
+                                                <p>修改密码</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="main-panel">
+                {__CONTENT__}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="wrapper-copyright">
+    <div class="copyright">
+        <div class="copy-text object">Copyright &copy; 2018.Lee-Hsu & Yorkin Lau All rights reserved.</div>
+
+        <div class="wrapper-navbouton">
+            <div class="google object">testin</div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- SCRIPT -->
+<script type="text/javascript" src="__STATIC__/index/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+<script type="text/javascript" src="__STATIC__/index/js/jquery.scrollTo.min.js"></script>
+<script type="text/javascript" src="__STATIC__/index/js/jquery.localScroll.min.js"></script>
+<script type="text/javascript" src="__STATIC__/index/js/jquery-animate-css-rotate-scale.js"></script>
+<script type="text/javascript" src="__STATIC__/index/js/fastclick.min.js"></script>
+<script type="text/javascript" src="__STATIC__/index/js/jquery.animate-colors-min.js"></script>
+<script type="text/javascript" src="__STATIC__/index/js/jquery.animate-shadow-min.js"></script>
+<script type="text/javascript" src="__STATIC__/index/js/main.js"></script>
+<script type="text/javascript" src="__STATIC__/index/js/bootstrap.min.js"></script>
+<script src="__STATIC__/index/assets/js/bootstrap.min.js" type="text/javascript"></script>
+<!--  Checkbox, Radio & Switch Plugins -->
+<script src="__STATIC__/index/assets/js/bootstrap-checkbox-radio.js"></script>
+<!--  Charts Plugin -->
+<script src="__STATIC__/index/assets/js/chartist.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="__STATIC__/index/assets/js/bootstrap-notify.js"></script>
+<!-- Paper Dashboard Core javascript and methods for Demo purpose -->
+<script src="__STATIC__/index/assets/js/paper-dashboard.js"></script>
+<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
+<script src="__STATIC__/index/assets/js/demo.js"></script>
+<script src="__STATIC__/index/js/layui.js"></script>
+
+</body>
+</html>

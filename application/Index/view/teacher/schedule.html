@@ -1,0 +1,43 @@
+{layout name="public/teacherlayout"/}
+
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="header" style="float: left">
+						<h4 class="title">课程表</h4>
+						<div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;">
+							<!--<button data-method="setTop" class="layui-btn">多窗口模式，层叠置顶</button>-->
+						<button  class="layui-btn" onclick="addlesson()">添加新课程</button>
+						<button  class="layui-btn" onclick="addvideo()">向课程添加视频</button>
+						</div>
+
+					</div>
+					<hr>
+					<div class="content table-responsive table-full-width"  style="min-height: 300px">
+
+							{foreach name="schedule" item="vo"}
+							<ul class="layui-nav layui-nav-tree" lay-filter="test">
+								<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+
+								<li class="layui-nav-item">
+									<a href="javascript:;"><i class="fa fa-graduation-cap"></i> {$vo.lessonname}</a>
+									<dl class="layui-nav-child">
+										{volist name="$vo.videos" id="v"}
+										<dd><a href="{:url('index/details', ['lessonid' => $vo.lessonid,'tid'=>$vo.tid,'showid'=>($i-1)])}">&#12288;&#12288;<i class="fa fa-video-camera"></i> {$v.vname}</a></dd>
+										<hr>
+										{/volist}
+									</dl>
+								</li>
+							</ul>
+						<hr style="height: 1px;">
+							{/foreach}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+

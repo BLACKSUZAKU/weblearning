@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="__STATIC__/index/css/layui.css" rel="stylesheet" />
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+</head>
+<body>
+
+
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>添加视频</legend>
+</fieldset>
+
+<form class="layui-form" action="" id="myform"  enctype="multipart/form-data" method="POST">
+    <div class="layui-form-item">
+        <label class="layui-form-label">视频名</label>
+        <div class="layui-input-block">
+            <input type="text" name="vname" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">加入课程</label>
+        <div class="layui-input-block">
+            <select name="lessonid" lay-filter="aihao">
+                <option value=""></option>
+                {volist name='lesson' id='vo'}
+                <option value="{$vo.lessonid}">{$vo.lessonname}</option>
+                {/volist}
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">视频文件</label>
+        <div class="layui-upload">
+            <input type="file" name="video" >
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <!--<input class="layui-btn" type="submit"  value="提交">-->
+            <!--<button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>-->
+            <a href="javascript:;"><button class="layui-btn" onclick="submitform()">立即提交</button></a>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+
+<script src="__STATIC__/index/js/layui.js"></script>
+<script src="__STATIC__/admin/assets/js/jquery-1.10.2.js"></script>
+<!-- Bootstrap Js -->
+<script src="__STATIC__/admin/assets/js/bootstrap.min.js"></script>
+<!-- Metis Menu Js -->
+<script src="__STATIC__/admin/assets/js/jquery.metisMenu.js"></script>
+<script src="__STATIC__/admin/assets/js/morris/raphael-2.1.0.min.js"></script>
+<script src="__STATIC__/admin/assets/js/morris/morris.js"></script>
+<!-- DATA TABLE SCRIPTS -->
+<script src="__STATIC__/admin/assets/js/dataTables/jquery.dataTables.js"></script>
+<script src="__STATIC__/admin/assets/js/dataTables/dataTables.bootstrap.js"></script>
+
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+    function submitform() {
+        var formdata = new FormData($("#myform")[0]);
+        $.ajax({
+            url:"{:url('index/doaddvideo')}",
+            method:'post',
+            data:formdata,
+            dataType:'JSON',
+            processData: false,
+            contentType: false,
+            success:function(data){
+                if(data.status='0'){
+                    // alert('成功');
+                    parent.layer.closeAll();
+                    parent.layer.msg(data.msg,{icon:6});
+                    parent.location.href=parent.location.href;//刷新页面
+                }
+                else{
+                    // alert("error");
+                    parent.layer.msg(data.msg,{icon:5});
+                }
+
+            },
+            error:function (data) {
+                // alert("失败");
+                parent.layer.msg(data.msg,{icon:5});
+            }
+        })
+    };
+    layui.use(['form', 'layer','layedit', 'laydate','upload'], function(){
+        var form = layui.form;
+    });
+</script>
+
+</body>
+</html>

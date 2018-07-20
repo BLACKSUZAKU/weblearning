@@ -1,0 +1,91 @@
+{layout name="public/teacherlayout"/}
+
+
+	<div class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="header">
+							<h4 class="title">个人信息</h4>
+							<p class="category">Here is a subtitle for this table</p>
+						</div>
+						{if(session('studenterror'))}
+						<div class="alert alert-danger">
+							<ul>
+								<li>{$Think.session.studenterror}</li>
+							</ul>
+						</div>
+						{elseif(session('studentsuccess'))}
+						<div class="alert alert-success">
+							<ul>
+								<li>{$Think.session.studentsuccess}</li>
+							</ul>
+						</div>
+						{/if}
+						<hr>
+						<!--<div class="content table-responsive table-full-width">-->
+						<form class="form-horizontal" action="{:url('index/tchangeinfo')}" method="post" enctype="multipart/form-data">
+							<div class="form-group">
+								<input type="hidden" name="teacherId" id="sid" value="{$userinfo.teacherId}">
+								<label class="col-md-2 control-label">用户名</label>
+								<div class="col-md-9">
+									<input class="form-control" id="teachername" placeholder="用户名" value="{$userinfo.teachername}" name="teachername">
+								</div>
+							</div>
+							<div class="form-group">
+								<label  class="col-md-2 control-label">性别</label>
+								<div class="col-md-9">
+									<select class="form-control" name="gender">
+										{switch name=$userinfo.gender}
+										{case value="1"}
+											<option value="1"  selected >男</option>
+											<option value="0"  >女</option>
+										{/case}
+										{case value="0"}
+										<option value="1" >男</option>
+										<option value="0" selected >女</option>
+										{/case}
+										{default /}default
+										{/switch}
+									</select>
+									<!--<input type="radio" name="gender" id="inlineRadio1" value="1" checked>男</label>-->
+									<!--<input type="radio" name="gender" id="inlineRadio2" value="0">女</label>-->
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-2 control-label">生日</label>
+								<div class="col-md-9">
+									<input type="date" class="form-control" id="birthday" name="bir" value="{$userinfo.bir}">
+								</div>
+							</div>
+							<div class="form-group">
+								<label  class="col-md-2 control-label">头像</label>
+								<div class="col-md-6">
+									<input type="file" name="pic" >
+								</div>
+								<div class="col-md-4">
+									<img src="__STATIC__/img/{$userinfo.pic}" id="prepic" width="60px" height="60px" src="" name="prepic">
+									<p >原头像</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2 control-label">电子邮箱</label>
+								<div class="col-md-9">
+									<input type="email" class="form-control" id="email" placeholder="电子邮件" name="email" value="{$userinfo.email}">
+								</div>
+							</div>
+							<div class="modal-footer">
+								<input type="submit" name="" value="提交修改" class="btn btn-default">
+							</div>
+						</form>
+						<!--</div>-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+

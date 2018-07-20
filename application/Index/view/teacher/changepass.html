@@ -1,0 +1,59 @@
+{layout name="public/teacherlayout"/}
+
+
+	<div class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="header">
+							<h4 class="title">修改密码</h4>
+							<p class="category">请填写密码和新密码</p>
+						</div>
+						{if(session('studenterror'))}
+						<div class="alert alert-danger">
+							<ul>
+								<li>{$Think.session.studenterror}</li>
+							</ul>
+						</div>
+						{elseif(session('studentsuccess'))}
+						<div class="alert alert-success">
+							<ul>
+								<li>{$Think.session.studentsuccess}</li>
+							</ul>
+						</div>
+						{/if}
+						<hr>
+						<!--<div class="content table-responsive table-full-width">-->
+						<form class="form-horizontal" action="{:url('index/tdochangepass')}" method="post" enctype="multipart/form-data">
+							<div class="form-group">
+								<!--<input type="hidden" name="sid" id="sid" value="{$Think.Session.userid}">-->
+								<label class="col-md-2 control-label">密码</label>
+								<div class="col-md-9">
+									<input type="password" class="form-control" id="studentname" placeholder="密码"  name="oldpass" required>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2 control-label">新密码</label>
+								<div class="col-md-9">
+									<input type="password" class="form-control" id="newpass" placeholder="新密码" name="newpass" required>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2 control-label">确认密码</label>
+								<div class="col-md-9">
+									<input type="password" class="form-control" id="checkpass" placeholder="确认密码" name="checkpass" required>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<input type="submit" name="" value="提交" class="btn btn-default">
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+

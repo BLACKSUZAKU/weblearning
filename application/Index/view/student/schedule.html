@@ -1,0 +1,63 @@
+{layout name="public/studentlayout"/}
+
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="header">
+						<h4 class="title">课程表</h4>
+						<p class="category">Here is a subtitle for this table</p>
+					</div>
+					<div class="content table-responsive table-full-width"  style="min-height: 300px">
+						<table class="table layui-table">
+							<thead>
+								<th>课程名</th>
+								<th>课程类型</th>
+								<th>添加时间</th>
+								<th>操作</th>
+							</thead>
+							<tbody>
+							{volist name='schedule' id = 'vo'}
+								<tr>
+									<td><a href="{:url('index/details', ['lessonid' => $vo.lessonid,'tid'=>$vo.tid])}" style="color: #1ABC9C">{$vo.lessonname}</a></td>
+									<td>{$vo.typename}</td>
+									<td>{$vo.createtime}</td>
+									<td><a href="#">评价课程</a> |
+									<a href="javascript:;"><button type="button" class="layui-btn" onclick="scheduleDel({$vo.scid})">移除课程</button></a>
+									</td>
+								</tr>
+							{/volist}
+							</tbody>
+						</table>
+					</div>
+					{$schedule->render()}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+    function scheduleDel(id) {
+        layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'element'], function(){
+            var layer = layui.layer //弹层
+                ,element = layui.element; //元素操作
+        layer.confirm('确认删除',{btn:['确认','取消']},
+            function () {
+                $.post("{:url('index/scheduledel')}",{"scid":id},function (data) {
+                    if(data.status==0){
+                        location.href=location.href;//刷新页面
+                        layer.msg(data.msg,{icon:6});
+                    }else{
+                        layer.msg(data.msg,{icon:5});
+                    }
+                });
+            },function () {
+
+            });
+        });
+    }
+</script>
+
+
+

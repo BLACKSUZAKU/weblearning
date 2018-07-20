@@ -1,0 +1,45 @@
+{layout name="public/teacherlayout"/}
+
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="header">
+						<h4 class="title">历史评论</h4>
+						<p class="category">Here is a subtitle for this table</p>
+					</div>
+					<div class="content table-responsive table-full-width"  style="min-height: 300px">
+						<table class="table layui-table">
+							<thead>
+								<th>课程名</th>
+								<th>评论学生</th>
+								<th>评论内容</th>
+								<th>评论时间</th>
+								<th>操作</th>
+							</thead>
+							<tbody>
+							{volist name='comment' id='vo'}
+								<tr>
+
+									<td>{$vo.lessonname}</td>
+									<td>{$vo.studentname}</td>
+									<td>{$vo.content|msubstr=0,50,'utf-8',true}</td>
+									<td>{$vo.createtime}</td>
+									<td>
+										<a href="javascript:;"><button type="button" class="layui-btn" onclick="reply({$vo.commentid})">回复评论</button></a>
+									</td>
+								</tr>
+							{/volist}
+							</tbody>
+						</table>
+					</div>
+					{$comment->render()}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+

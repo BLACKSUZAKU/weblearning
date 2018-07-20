@@ -1,0 +1,45 @@
+{layout name="public/teacherlayout"/}
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="header">
+						<h4 class="title">课程问答</h4>
+						<p class="category">学生课程相关提问</p>
+					</div>
+					<div class="content table-responsive table-full-width" style="min-height: 300px">
+						<table class="table table-striped layui-table">
+							<thead>
+							<tr>
+								<th>ID</th>
+								<th>提问用户</th>
+								<th>提问内容</th>
+								<th>提问课程</th>
+								<th>课中视频</th>
+								<!--<th>头像</th>-->
+								<th>操作</th>
+							</tr>
+							</thead>
+							<tbody>
+							{volist name='question' id='vo'}
+							<tr class="odd gradeX">
+								<td>{$i}</td>
+								<td>{$vo.studentname}</td>
+								<td>{$vo.content}</td>
+								<td>{$vo.lessonname}</td>
+								<td>{$vo.vname}</td>
+								<td><a href="javascript:;"><button type="button" class="layui-btn" onclick="questiondel({$vo.qid})">回复</button></a></td>
+							</tr>
+							{/volist}
+							</tbody>
+						</table>
+						{$question->render()}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+

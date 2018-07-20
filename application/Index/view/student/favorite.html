@@ -1,0 +1,39 @@
+{layout name="public/studentlayout"/}
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="header">
+						<h4 class="title">我的收藏</h4>
+						<p class="category">喜欢的课程收藏</p>
+					</div>
+					<div class="content table-responsive table-full-width" style="min-height: 300px">
+						<table class="table table-striped layui-table">
+							<thead>
+							<th>课程名</th>
+							<th>课程类型</th>
+							<th>操作</th>
+							</thead>
+							<tbody>
+							{volist name='favor' id='vo'}
+							<tr>
+								<td>{$vo.lessonname}</td>
+								<td>{$vo.typename}</td>
+								<td>
+									<a href="#">评价课程</a> |
+									<a href="#">取消收藏</a>
+								</td>
+							</tr>
+							{/volist}
+							</tbody>
+						</table>
+					</div>
+                    {$favor->render()}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
